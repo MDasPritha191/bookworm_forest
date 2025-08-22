@@ -48,38 +48,182 @@
 
 
 
+{{-- <x-guest-layout>
+
+    <div class="min-h-screen flex flex-col items-center justify-center 
+                bg-[#f5f5dc] text-[#4b2e2e] p-6">
+        
+        <h1 class="text-3xl font-bold mb-6 text-center">
+            Hey bookworm, it’s been long, welcome to your forest home 🌲📚
+        </h1>
+
+       
+        <form method="POST" action="{{ route('login') }}" 
+              class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+            @csrf
+
+            <!-- Email -->
+            <div>
+               
+                <x-input-label for="email" :value="__('Email')" class="text-[#4b2e2e]" />
+                
+              
+                <x-text-input id="email" 
+                    class="block mt-1 w-full border-[#4b2e2e] 
+                           focus:border-[#4b2e2e] focus:ring-[#4b2e2e]" 
+                    type="email" name="email" required autofocus />
+                
+                <x-input-error :messages="$errors->get('email')" 
+                               class="mt-2 text-red-600" />
+            </div>
+
+            <!-- Password -->
+            <div class="mt-4">
+                <x-input-label for="password" :value="__('Password')" class="text-[#4b2e2e]" />
+                <x-text-input id="password" 
+                    class="block mt-1 w-full border-[#4b2e2e] 
+                           focus:border-[#4b2e2e] focus:ring-[#4b2e2e]" 
+                    type="password" name="password" required />
+                <x-input-error :messages="$errors->get('password')" 
+                               class="mt-2 text-red-600" />
+            </div>
+
+            <!-- Login Button -->
+            <div class="flex items-center justify-end mt-6">
+                <x-primary-button class="bg-[#4b2e2e] hover:bg-[#3a2323] 
+                                     text-white px-6 py-2 rounded-lg">
+                    {{ __('Login') }}
+                </x-primary-button>
+            </div>
+        </form>
+
+        <!-- Register Link -->
+        <div class="mt-6 text-center">
+            <a href="{{ route('register') }}" 
+               class="text-[#4b2e2e] font-semibold underline hover:text-[#3a2323]">
+                🌱 New worm in the forest? Find your safe now
+            </a>
+        </div>
+    </div>
+</x-guest-layout> --}}
+
+
+
+
+
+
+
+
+
+
+{{-- 
 <x-guest-layout>
-    <h1 class="text-2xl font-bold mb-4">Hey bookworm, it’s been long, welcome to your forest home 🌲📚</h1>
+    <div class="min-h-screen flex flex-col items-center justify-center 
+                bg-[#f4e8c1] text-[#3c2f2f] p-6">
+        
+        <h1 class="text-3xl font-bold mb-6 text-center">
+            Hey bookworm, it’s been long, welcome to your forest home 🌲📚
+        </h1>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+        <form method="POST" action="{{ route('login') }}" 
+              class="bg-[#faf0d7] rounded-2xl shadow-lg p-8 w-full max-w-md">
+            @csrf
 
-        <!-- Email -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <!-- Email -->
+            <div>
+                <x-input-label for="email" :value="__('Email')" class="text-[#3c2f2f]" />
+                <x-text-input id="email" 
+                    class="block mt-1 w-full border-[#5c4033] 
+                           focus:border-[#5c4033] focus:ring-[#5c4033]" 
+                    type="email" name="email" required autofocus />
+                <x-input-error :messages="$errors->get('email')" 
+                               class="mt-2 text-[#8b0000]" />
+            </div>
+
+            <!-- Password -->
+            <div class="mt-4">
+                <x-input-label for="password" :value="__('Password')" class="text-[#3c2f2f]" />
+                <x-text-input id="password" 
+                    class="block mt-1 w-full border-[#5c4033] 
+                           focus:border-[#5c4033] focus:ring-[#5c4033]" 
+                    type="password" name="password" required />
+                <x-input-error :messages="$errors->get('password')" 
+                               class="mt-2 text-[#8b0000]" />
+            </div>
+
+            <!-- Login Button -->
+            <div class="flex items-center justify-end mt-6">
+                <x-primary-button class="bg-[#5c4033] hover:bg-[#4a3226] 
+                                     text-white px-6 py-2 rounded-lg">
+                    {{ __('Login') }}
+                </x-primary-button>
+            </div>
+        </form>
+
+        <!-- Register Link -->
+        <div class="mt-6 text-center">
+            <a href="{{ route('register') }}" 
+               class="text-[#3c2f2f] font-semibold underline hover:text-[#4a3226]">
+                🌱 New worm in the forest? Find your safe now
+            </a>
         </div>
+    </div>
+</x-guest-layout> --}}
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+
+<x-guest-layout>
+    <div class="min-h-screen flex flex-col items-center justify-center 
+                bg-[#f4e8c1] text-[#3c2f2f] p-6">
+        
+        <h1 class="text-3xl font-bold mb-6 text-center">
+            Hey bookworm, it’s been long, welcome to your forest home 🌲📚
+        </h1>
+
+        <form method="POST" action="{{ route('login') }}" 
+              class="bg-[#faf0d7] rounded-2xl shadow-lg p-8 w-full max-w-md">
+            @csrf
+
+            <!-- Email -->
+            <div>
+                <x-input-label for="email" :value="__('Email')" class="text-[#3c2f2f]" />
+                <x-text-input id="email" 
+                    class="block mt-1 w-full !bg-white !text-[#3c2f2f] border-[#5c4033] 
+                           focus:border-[#5c4033] focus:ring-[#5c4033] 
+                           focus:ring-opacity-50 rounded-md" 
+                    style="background-color: white !important; color: #3c2f2f !important; -webkit-text-fill-color: #3c2f2f !important;" 
+                    type="email" name="email" required autofocus />
+                <x-input-error :messages="$errors->get('email')" 
+                               class="mt-2 text-[#8b0000]" />
+            </div>
+
+            <!-- Password -->
+            <div class="mt-4">
+                <x-input-label for="password" :value="__('Password')" class="text-[#3c2f2f]" />
+                <x-text-input id="password" 
+                    class="block mt-1 w-full !bg-white !text-[#3c2f2f] border-[#5c4033] 
+                           focus:border-[#5c4033] focus:ring-[#5c4033] 
+                           focus:ring-opacity-50 rounded-md" 
+                    style="background-color: white !important; color: #3c2f2f !important; -webkit-text-fill-color: #3c2f2f !important;" 
+                    type="password" name="password" required />
+                <x-input-error :messages="$errors->get('password')" 
+                               class="mt-2 text-[#8b0000]" />
+            </div>
+
+            <!-- Login Button -->
+            <div class="flex items-center justify-end mt-6">
+                <x-primary-button class="bg-[#5c4033] hover:bg-[#4a3226] 
+                                     text-white px-6 py-2 rounded-lg">
+                    {{ __('Login') }}
+                </x-primary-button>
+            </div>
+        </form>
+
+        <!-- Register Link -->
+        <div class="mt-6 text-center">
+            <a href="{{ route('register') }}" 
+               class="text-[#3c2f2f] font-semibold underline hover:text-[#4a3226]">
+                🌱 New worm in the forest? Find your safe now
+            </a>
         </div>
-
-        <!-- Login Button -->
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button class="ms-3">
-                {{ __('Login') }}
-            </x-primary-button>
-        </div>
-    </form>
-
-    <!-- Register Link -->
-    <div class="mt-4 text-center">
-        <a href="{{ route('register') }}" class="text-blue-600 underline">
-            🌱 New worm in the forest? Find your safe now
-        </a>
     </div>
 </x-guest-layout>

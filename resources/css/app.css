@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Ensure all inputs have white background and brown text */
+input:not([type="submit"]):not([type="button"]),
+input.form-input,
+input[type="email"],
+input[type="password"] {
+    background-color: white !important;
+    color: #3c2f2f !important;
+    border: 1px solid #5c4033 !important;
+    -webkit-text-fill-color: #3c2f2f !important; /* Handle browser autofill */
+}
+
+/* Counteract dark mode interference */
+@media (prefers-color-scheme: dark) {
+    input:not([type="submit"]):not([type="button"]),
+    input.form-input,
+    input[type="email"],
+    input[type="password"] {
+        background-color: white !important;
+        color: #3c2f2f !important;
+        -webkit-text-fill-color: #3c2f2f !important;
+    }
+}
+
+/* Override autofill styles for WebKit browsers */
+input:-webkit-autofill,
+input.form-input:-webkit-autofill,
+input[type="email"]:-webkit-autofill,
+input[type="password"]:-webkit-autofill,
+input:-webkit-autofill:hover,
+input.form-input:-webkit-autofill:hover,
+input[type="email"]:-webkit-autofill:hover,
+input[type="password"]:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input.form-input:-webkit-autofill:focus,
+input[type="email"]:-webkit-autofill:focus,
+input[type="password"]:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: #3c2f2f !important;
+    color: #3c2f2f !important;
+}
