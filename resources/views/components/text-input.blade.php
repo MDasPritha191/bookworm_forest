@@ -1,3 +1,8 @@
-@props(['disabled' => false])
+{{-- resources/views/components/text-input.blade.php --}}
+@props(['disabled' => false, 'placeholder' => '']) {{-- Add the 'placeholder' prop with a default value --}}
 
-<input {{ $attributes->merge(['class' => 'form-input bg-white text-[#3c2f2f] border-[#5c4033] rounded-md']) }} />
+<input 
+    {{ $disabled ? 'disabled' : '' }} 
+    placeholder="{{ $placeholder }}" {{-- Output the placeholder attribute --}}
+    {!! $attributes->merge(['class' => 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm']) !!}
+>
