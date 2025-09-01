@@ -17,13 +17,20 @@ class UserController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
 
-        // Insert into members table
-        Member::create([
+        // Insert into members table and get the new member object
+        $user = Member::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect('/')->with('success', 'Registration successful!');
+        // Save session so user is logged in immediately
+        session([
+            'member_id' => $user->id,
+            'member_name' => $user->name,
+        ]);
+
+        // Redirect to profile
+        return redirect()->route('profile')->with('success', 'Registration successful!');
     }
 }

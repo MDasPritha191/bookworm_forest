@@ -22,31 +22,51 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'genre' => 'required|string',
+            'name' => 'required',
+            'author' => 'required',
+            'genre' => 'required',
             'rating' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string',
-            'quote' => 'nullable|string|max:255',
+            'quote' => 'nullable|string',
         ]);
 
-        Book::create([
-            'member_id' => session('member_id'),
+        $book = Book::create([
             'name' => $request->name,
             'author' => $request->author,
             'genre' => $request->genre,
             'rating' => $request->rating,
-            'comment' => $request->comment,
-            'quote' => $request->quote,
+            'member_id' => auth()->id(), // user who posted
         ]);
 
-        return redirect()->route('profile')->with('success', 'Book added successfully!');
+        // ✅ Save initial comment if provided
+        if ($request->comment) {
+            $book->comments()->create([
+                'member_id' => auth()->id(),
+                'comment' => $request->comment,
+            ]);
+        }
+
+        // ✅ Save initial quote if provided
+        if ($request->quote) {
+            $book->quotes()->create([
+                'member_id' => auth()->id(),
+                'quote' => $request->quote,
+            ]);
+        }
+
+        return redirect()->route('home')->with('success', 'Book added successfully!');
     }
 
     public function allBooks()
     {
-        $books = \App\Models\Book::with('member')->latest()->get();
-        return view('home', compact('books'));
+            // Load books with their poster (member), comments, and quotes
+            $books = \App\Models\Book::with([
+            'member',
+            'comments.member',
+            'quotes.member'
+           ])->latest()->get();
+
+             return view('home', compact('books'));
     }
 
     public function edit(Book $book)
@@ -120,5 +140,4 @@ class BookController extends Controller
         // Redirect back to profile with message
         return redirect()->route('profile')->with('success', 'Book deleted successfully!');
     }
-
 }

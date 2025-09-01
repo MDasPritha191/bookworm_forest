@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\InteractionController;
 
 // Login form
 Route::get('/login', function () {
@@ -48,6 +48,8 @@ Route::get('/logout', function () {
 })->name('logout');
 
 
+
+
 // Show edit form
 Route::get('/profile/edit', [AuthController::class, 'edit'])->name('profile.edit');
 
@@ -62,3 +64,13 @@ Route::get('/book/add', [BookController::class, 'create'])->name('book.create');
 
 // Handle form submission
 Route::post('/book/add', [BookController::class, 'store'])->name('book.store');
+
+
+
+// Comments
+Route::get('/book/{id}/comments', [InteractionController::class, 'comments'])->name('book.comments');
+Route::post('/book/{id}/comments', [InteractionController::class, 'storeComment'])->name('book.comments.store');
+
+// Quotes
+Route::get('/book/{id}/quotes', [InteractionController::class, 'quotes'])->name('book.quotes');
+Route::post('/book/{id}/quotes', [InteractionController::class, 'storeQuote'])->name('book.quotes.store');
