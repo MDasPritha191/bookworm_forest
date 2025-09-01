@@ -7,12 +7,18 @@
 <body class="bg-light">
 
     <div class="container py-5">
+
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
         <div class="card shadow p-4 text-center mx-auto" style="max-width: 500px;">
             <h2>Welcome, {{ session('member_name') }}</h2>
             <p>Your ID: {{ session('member_id') }}</p>
-            <a href="/" class="btn btn-primary mt-3">Go to Home</a>
+           <a href="{{ route('home') }}" class="btn btn-primary mt-3">Go to Home</a>
             <a href="{{ route('profile.edit') }}" class="btn btn-warning mt-3">Edit Profile</a>
             <a href="/logout" class="btn btn-danger mt-3">Logout</a>
+            
             <a href="{{ route('book.create') }}" class="btn btn-info mt-3">Add Book</a>
         </div>
 
@@ -24,20 +30,32 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Author</th>
                                 <th>Genre</th>
                                 <th>Rating</th>
                                 <th>Comment</th>
                                 <th>Quote</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($books as $book)
                                 <tr>
                                     <td>{{ $book->name }}</td>
+                                    <td>{{ $book->author }}</td>
                                     <td>{{ $book->genre }}</td>
                                     <td>{{ $book->rating }}/5</td>
                                     <td>{{ $book->comment }}</td>
                                     <td>{{ $book->quote }}</td>
+                                    <td style="white-space:nowrap;">
+                                        <a href="{{ route('book.edit', $book->id) }}" class="btn btn-sm btn-warning">Edit</a>
+
+                                        <form action="{{ route('book.destroy', $book->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this book?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

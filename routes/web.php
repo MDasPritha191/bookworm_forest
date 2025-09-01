@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthController;
 
+
 // Login form
 Route::get('/login', function () {
     return view('login');
@@ -17,7 +18,18 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 // Profile page (after successful login)
 Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
 
+//home
+Route::get('/home', [BookController::class, 'allBooks'])->name('home');
 
+// Edit form
+Route::get('/book/{book}/edit', [BookController::class, 'edit'])->name('book.edit');
+
+//delete 
+// Delete a book (RESTful: DELETE /book/{book})
+Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('book.destroy');
+
+// Update submit (use POST for simplicity; you can use PUT if you prefer)
+Route::post('/book/{book}/edit', [BookController::class, 'update'])->name('book.update');
 
 Route::get('/', function () {
     return view('welcome');

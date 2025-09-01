@@ -15,6 +15,10 @@
                 <input type="text" name="name" class="form-control" required>
             </div>
             <div class="mb-3">
+                <label>Author Name</label>
+                <input type="text" name="author" class="form-control" required>
+            </div>
+            <div class="mb-3">
                 <label>Genre</label>
                 <select name="genre" class="form-control" required>
                     <option value="">-- Select Genre --</option>
