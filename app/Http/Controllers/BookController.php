@@ -140,4 +140,26 @@ class BookController extends Controller
         // Redirect back to profile with message
         return redirect()->route('profile')->with('success', 'Book deleted successfully!');
     }
+     public function index(Request $request)
+    {
+        // Fixed genre list
+        $genres = [
+            'Fantasy',
+            'Sci-Fi',
+            'Romance',
+            'Mystery',
+            'Thriller',
+            'Non-fiction',
+            'Slice of Life',
+            'Psychology',
+        ];
+
+        // Filter books if a genre is selected
+        $books = Book::when($request->genre, function ($query, $genre) {
+            return $query->where('genre', $genre);
+        })->with(['member', 'comments', 'quotes'])->get();
+
+        return view('home', compact('books', 'genres'));
+    }
+
 }

@@ -74,3 +74,7 @@ Route::post('/book/{id}/comments', [InteractionController::class, 'storeComment'
 // Quotes
 Route::get('/book/{id}/quotes', [InteractionController::class, 'quotes'])->name('book.quotes');
 Route::post('/book/{id}/quotes', [InteractionController::class, 'storeQuote'])->name('book.quotes.store');
+
+
+// Homepage with filter
+Route::get('/home', [BookController::class, 'index'])->name('home');
