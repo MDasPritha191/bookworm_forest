@@ -16,21 +16,31 @@
     <div class="container my-5">
         <h2 class="text-center mb-4">All Books</h2>
 
-        <form method="GET" action="{{ route('home') }}" class="mb-4 d-flex justify-content-center">
-            <select name="genre" class="form-select w-25 me-2">
-                <option value="">-- All Genres --</option>
-                @foreach($genres as $genre)
-                    <option value="{{ $genre }}" {{ request('genre') == $genre ? 'selected' : '' }}>
-                        {{ $genre }}
-                    </option>
-                @endforeach
-            </select>
-            <button type="submit" class="btn btn-primary">Filter</button>
+        <form method="GET" action="{{ route('home') }}" class="row mb-4">
+            <div class="col-md-4">
+                <select name="genre" class="form-select">
+                    <option value="">All Genres</option>
+                    @foreach($genres as $genre)
+                        <option value="{{ $genre }}" {{ request('genre') == $genre ? 'selected' : '' }}>
+                            {{ $genre }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <input type="text" name="search" class="form-control"
+                       placeholder="Search by title or author..." value="{{ request('search') }}">
+            </div>
+
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
         </form>
 
         <div class="row">
             @if($books->isEmpty())
-                <p class="text-center text-muted">No books found for this genre.</p>
+                <p class="text-center text-muted">No books found.</p>
             @else
                 @foreach($books as $book)
                     <div class="col-md-4 mb-4">

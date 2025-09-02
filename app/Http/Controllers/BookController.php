@@ -64,9 +64,9 @@ class BookController extends Controller
             'member',
             'comments.member',
             'quotes.member'
-           ])->latest()->get();
+            ])->latest()->get();
 
-             return view('home', compact('books'));
+              return view('home', compact('books'));
     }
 
     public function edit(Book $book)
@@ -142,7 +142,6 @@ class BookController extends Controller
     }
      public function index(Request $request)
     {
-        // Fixed genre list
         $genres = [
             'Fantasy',
             'Sci-Fi',
@@ -154,12 +153,19 @@ class BookController extends Controller
             'Psychology',
         ];
 
-        // Filter books if a genre is selected
-        $books = Book::when($request->genre, function ($query, $genre) {
-            return $query->where('genre', $genre);
-        })->with(['member', 'comments', 'quotes'])->get();
+        $books = Book::query()
+            ->when($request->genre, function ($query, $genre) {
+                return $query->where('genre', $genre);
+            })
+            ->when($request->search, function ($query, $search) {
+                return $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                      ->orWhere('author', 'like', "%{$search}%");
+                });
+            })
+            ->with(['member', 'comments', 'quotes'])
+            ->get();
 
         return view('home', compact('books', 'genres'));
     }
-
 }
