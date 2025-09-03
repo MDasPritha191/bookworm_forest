@@ -28,7 +28,7 @@
         <h1 class="mb-4">Welcome to My Laravel App</h1>
 
         <a href="{{ route('register') }}" class="btn btn-primary btn-lg m-2">Register</a>
-        <a href="{{ route('home') }}" class="btn btn-info btn-lg m-2">Go to Home</a>
+        {{--<a href="{{ route('home') }}" class="btn btn-info btn-lg m-2">Go to Home</a>--}}
 
         <a href="{{ route('login') }}" class="btn btn-success btn-lg m-2">Login</a>
     </div>

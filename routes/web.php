@@ -78,3 +78,25 @@ Route::post('/book/{id}/quotes', [InteractionController::class, 'storeQuote'])->
 
 // Homepage with filter
 Route::get('/home', [BookController::class, 'index'])->name('home');
+
+
+
+use App\Http\Controllers\AdminController;
+
+// Admin Routes — only accessible to admins
+Route::middleware(['admin'])->group(function () {
+    // Admin dashboard
+    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    // Delete a book
+    Route::delete('/admin/book/{book}', [AdminController::class, 'deleteBook'])->name('admin.deleteBook');
+
+    // Delete a user
+    Route::delete('/admin/user/{user}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+
+    // View reported items
+    Route::get('/admin/reports', [AdminController::class, 'reports'])->name('admin.reports');
+});
+
+
+

@@ -27,12 +27,10 @@
                     @endforeach
                 </select>
             </div>
-
             <div class="col-md-6">
                 <input type="text" name="search" class="form-control"
                        placeholder="Search by title or author..." value="{{ request('search') }}">
             </div>
-
             <div class="col-md-2">
                 <button type="submit" class="btn btn-primary w-100">Filter</button>
             </div>
@@ -50,11 +48,23 @@
                                 <h6 class="card-subtitle mb-2 text-muted">By {{ $book->author }}</h6>
                                 <p><strong>Genre:</strong> {{ $book->genre }}</p>
                                 <p><strong>Rating:</strong> {{ $book->rating }}/5</p>
+
+                                {{-- Show a preview of the first comment if it exists --}}
+                                @if($book->comments->isNotEmpty())
+                                    <p class="card-text"><small><strong>Comment:</strong> {{ Str::limit($book->comments->first()->comment, 40) }}</small></p>
+                                @endif
+
+                                {{-- Show a preview of the first quote if it exists --}}
+                                @if($book->quotes->isNotEmpty())
+                                    <p class="card-text"><small><strong>Quote:</strong> <em>"{{ Str::limit($book->quotes->first()->quote, 40) }}"</em></small></p>
+                                @endif
                             </div>
-                            <div class="card-footer text-muted">
-                                Posted by {{ $book->member->name ?? 'Unknown' }} <br>
-                                <a href="{{ route('book.comments', $book->id) }}" class="btn btn-sm btn-outline-primary mt-2">Comments</a>
-                                <a href="{{ route('book.quotes', $book->id) }}" class="btn btn-sm btn-outline-secondary mt-2">Quotes</a>
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Posted by {{ $book->member->name ?? 'Unknown' }}</small>
+                                <div>
+                                    <a href="{{ route('book.comments', $book->id) }}" class="btn btn-sm btn-primary">Comments</a>
+                                    <a href="{{ route('book.quotes', $book->id) }}" class="btn btn-sm btn-secondary">Quotes</a>
+                                </div>
                             </div>
                         </div>
                     </div>
