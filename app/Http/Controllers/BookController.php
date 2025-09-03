@@ -35,13 +35,14 @@ class BookController extends Controller
             'author' => $request->author,
             'genre' => $request->genre,
             'rating' => $request->rating,
-            'member_id' => auth()->id(), // user who posted
+             'member_id' => session('member_id'), // ✅ use session
+            //'member_id' => auth()->id(), // user who posted
         ]);
 
         // ✅ Save initial comment if provided
         if ($request->comment) {
             $book->comments()->create([
-                'member_id' => auth()->id(),
+                'member_id' => session('member_id'), // ✅ use session
                 'comment' => $request->comment,
             ]);
         }
@@ -49,7 +50,7 @@ class BookController extends Controller
         // ✅ Save initial quote if provided
         if ($request->quote) {
             $book->quotes()->create([
-                'member_id' => auth()->id(),
+                'member_id' => session('member_id'), // ✅ use session
                 'quote' => $request->quote,
             ]);
         }

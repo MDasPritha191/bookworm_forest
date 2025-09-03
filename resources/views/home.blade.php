@@ -61,13 +61,14 @@
                                     <p class="card-text"><small><strong>Quote:</strong> <em>"{{ $book->quote }}"</em></small></p>
                                 @endif
                             </div>
-                            <div class="card-footer d-flex justify-content-between align-items-center">
-                                <small class="text-muted">Posted by {{ $book->member->name ?? 'Unknown' }}</small>
-                                <div>
-                                    <a href="{{ route('book.comments', $book->id) }}" class="btn btn-sm btn-primary">Comments</a>
-                                    <a href="{{ route('book.quotes', $book->id) }}" class="btn btn-sm btn-secondary">Quotes</a>
-                                </div>
-                            </div>
+                           <div class="card-footer d-flex justify-content-between align-items-center">
+    <small class="text-muted">Posted by {{ $book->member->name ?? 'Unknown' }}</small>
+    <div>
+        <a href="{{ route('book.comments', $book->id) }}" class="btn btn-sm btn-primary">Comments</a>
+        <a href="{{ route('book.quotes', $book->id) }}" class="btn btn-sm btn-secondary">Quotes</a>
+        <a href="{{ route('reports.create', $book->id) }}" class="btn btn-sm btn-danger">Report</a>
+        </div>
+    </div>
                         </div>
                     </div>
                 @endforeach

@@ -22,12 +22,14 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_admin' => 0, // normal user by default
         ]);
 
         // Save session so user is logged in immediately
         session([
             'member_id' => $user->id,
             'member_name' => $user->name,
+            'is_admin' => $user->is_admin,
         ]);
 
         // Redirect to profile
