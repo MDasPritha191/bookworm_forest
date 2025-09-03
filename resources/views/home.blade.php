@@ -16,25 +16,29 @@
     <div class="container my-5">
         <h2 class="text-center mb-4">All Books</h2>
 
-        <form method="GET" action="{{ route('home') }}" class="row mb-4">
-            <div class="col-md-4">
-                <select name="genre" class="form-select">
-                    <option value="">All Genres</option>
-                    @foreach($genres as $genre)
-                        <option value="{{ $genre }}" {{ request('genre') == $genre ? 'selected' : '' }}>
-                            {{ $genre }}
-                        </option>
-                    @endforeach
-                </select>
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10">
+                <form method="GET" action="{{ route('home') }}" class="row">
+                    <div class="col-md-4">
+                        <select name="genre" class="form-select">
+                            <option value="">All Genres</option>
+                            @foreach($genres as $genre)
+                                <option value="{{ $genre }}" {{ request('genre') == $genre ? 'selected' : '' }}>
+                                    {{ $genre }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" name="search" class="form-control"
+                               placeholder="Search by title or author..." value="{{ request('search') }}">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">Filter</button>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-6">
-                <input type="text" name="search" class="form-control"
-                       placeholder="Search by title or author..." value="{{ request('search') }}">
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary w-100">Filter</button>
-            </div>
-        </form>
+        </div>
 
         <div class="row">
             @if($books->isEmpty())
@@ -49,14 +53,12 @@
                                 <p><strong>Genre:</strong> {{ $book->genre }}</p>
                                 <p><strong>Rating:</strong> {{ $book->rating }}/5</p>
 
-                                {{-- Show a preview of the first comment if it exists --}}
-                                @if($book->comments->isNotEmpty())
-                                    <p class="card-text"><small><strong>Comment:</strong> {{ Str::limit($book->comments->first()->comment, 40) }}</small></p>
+                                {{-- Displays the comment and quote directly from the books table --}}
+                                @if($book->comment)
+                                    <p class="card-text"><small><strong>Comment:</strong> {{ $book->comment }}</small></p>
                                 @endif
-
-                                {{-- Show a preview of the first quote if it exists --}}
-                                @if($book->quotes->isNotEmpty())
-                                    <p class="card-text"><small><strong>Quote:</strong> <em>"{{ Str::limit($book->quotes->first()->quote, 40) }}"</em></small></p>
+                                @if($book->quote)
+                                    <p class="card-text"><small><strong>Quote:</strong> <em>"{{ $book->quote }}"</em></small></p>
                                 @endif
                             </div>
                             <div class="card-footer d-flex justify-content-between align-items-center">
